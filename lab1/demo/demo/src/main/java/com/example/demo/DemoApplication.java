@@ -25,6 +25,9 @@ public class DemoApplication {
 		ThirdComponent  third = context.getBean("third",ThirdComponent.class);
 			third.SayHi();
 
+		PersonDb personDb = context.getBean("persondb", PersonDb.class);
+
+		PersonRepository repository = context.getBean("repository", PersonRepository.class);
 	}
 
 }

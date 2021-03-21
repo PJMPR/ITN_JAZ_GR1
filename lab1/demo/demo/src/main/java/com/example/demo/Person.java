@@ -1,0 +1,17 @@
+package com.example.demo;
+
+public class Person {
+
+    public String name;
+    public Person() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = "Jan";
+    }
+}
+
