@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+<!--
     <bean id="first" class="com.example.demo.FirstComponent"></bean>
 
     <bean id="second" class="com.example.demo.SecondComponent">
@@ -14,4 +14,17 @@
         <constructor-arg index="0" ref="first"/>
         <constructor-arg index="1" ref="second"/>
     </bean>
+-->
+    <bean id="Person" class="com.example.demo.Person">
+
+    </bean>
+
+    <bean id="PersonDb" class="com.example.demo.PersonDb">
+
+    </bean>
+
+    <bean id="PersonRepository" class="com.example.demo.PersonRepository">
+        <constructor-arg index="0" ref="PersonDb"/>
+    </bean>
+
 </beans>
