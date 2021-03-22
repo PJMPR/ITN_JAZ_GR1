@@ -27,7 +27,7 @@ class DemoApplicationTests extends Mockito {
 
 		//Utwórz klase PersonDb. Oznacz ją jako komponent
 		//pobierz ją z kontekstu DI Springa
-		PersonDb db = context.getBean(Persondb.class);
+		PersonDb db = context.getBean(PersonDb.class);
 		Assert.isInstanceOf(Person[].class, db.getPersonArray());
 
 		//Utwórz klasę PersonRepository. Oznacz ją jako komponent.
@@ -51,11 +51,11 @@ class DemoApplicationTests extends Mockito {
 	void beanConfigTest(){
 		Person person = new Person();
 		person.setName("Jan");
-		Assert.isTrue(person.getName() == "Jan");
+		Assert.isTrue(person.getName() =="Jan");
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
 
 
-		PersonDb db = context.getBean(Persondb.class);
+		PersonDb db = context.getBean(PersonDb.class);
 		Assert.isInstanceOf(Person[].class, db.getPersonArray());
 
 		PersonRepository repository = context.getBean(PersonRepository.class);
