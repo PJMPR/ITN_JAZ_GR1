@@ -26,7 +26,6 @@ public class DemoApplication {
 			third.SayHi();
 
 		PersonDb personDb = context.getBean("persondb", PersonDb.class);
-
 		PersonRepository repository = context.getBean("repository", PersonRepository.class);
 	}
 
