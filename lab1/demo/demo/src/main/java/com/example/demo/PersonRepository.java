@@ -14,7 +14,7 @@ public class PersonRepository{
     }
 
     public void save(Person person){
-        PersonDb.addToArray(person);
+        personDb.addToArray(person);
     }
 
     public PersonDb getDb(){
