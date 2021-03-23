@@ -27,7 +27,7 @@ class DemoApplicationTests extends Mockito {
 
 		//Utwórz klase PersonDb. Oznacz ją jako komponent
 		//pobierz ją z kontekstu DI Springa
-		PersonDb db = context.getBean(Persondb.class);
+		PersonDb db = context.getBean(PersonDb.class);
 		Assert.isInstanceOf(Person[].class, db.getPersonArray());
 
 		//Utwórz klasę PersonRepository. Oznacz ją jako komponent.
