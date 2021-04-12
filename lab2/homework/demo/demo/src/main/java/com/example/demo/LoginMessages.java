@@ -1,18 +1,21 @@
 package com.example.demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class LoginMessages {
 
-    private String username;
+    String username;
 
-    public String welcome() {return "Witaj";}
+    @Value("${message.welcome}") String welcome;
+    public String welcome() {return welcome;}
 
-    public String getUsernameMessage() {return "podaj nazwe uzytkownika:";}
+    @Value("${message.provideUsername}") String provideUsername;
+    public String getUsernameMessage() {return provideUsername;}
 
     public void setUsername(String username) {this.username = username;}
 
-    public String getLoggedAsMessage() {return "Zalogowany jako "+ this.username;}
+    @Value("${message.username}") String user;
+    public String getLoggedAsMessage() {return user + " " + username;}
 }

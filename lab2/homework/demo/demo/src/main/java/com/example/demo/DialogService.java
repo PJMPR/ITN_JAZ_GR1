@@ -6,8 +6,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DialogService {
 
-    @Bean
-    public void DialogServiceA() {}
+    private final LoginMessages messages;
 
-    public LoginMessages getLoginMessages() {return new LoginMessages();}
+//    @Bean
+    public DialogService(LoginMessages messages) {this.messages = messages;}
+
+    public LoginMessages getLoginMessages() {return messages;}
 }
