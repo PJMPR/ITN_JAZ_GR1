@@ -1,0 +1,3 @@
+database.mysql.url=db.prod
+database.mysql.user=demo_app_user
+database.mysql.password=pa$$word
