@@ -8,7 +8,7 @@ public class DialogService {
 
     private final LoginMessages messages;
 
-    //    @Bean
+   
     public DialogService(LoginMessages messages) {this.messages = messages;}
 
     public LoginMessages getLoginMessages() {return messages;}
