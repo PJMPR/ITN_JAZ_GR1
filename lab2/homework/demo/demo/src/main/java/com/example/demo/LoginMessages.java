@@ -20,8 +20,8 @@ public class LoginMessages {
     public void setUsername(String username) {
         this.username = username;
     }
-    @Value("${message.loggedAsMessage}") String loggedAsMessage;
+    @Value("${message.username}") String user;
     public String getLoggedAsMessage() {
-        return loggedAsMessage + " " + username;
+        return user + " " + username;
     }
 }
