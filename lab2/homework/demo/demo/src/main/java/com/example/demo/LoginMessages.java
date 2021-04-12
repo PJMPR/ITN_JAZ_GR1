@@ -1,24 +1,31 @@
 package com.example.demo;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 @Configuration
 public class LoginMessages {
-    private String username;
-    public String welcome() {
-        return "Welcome";
-    }
 
+    String user;
+
+    public LoginMessages loginMessages(){
+        return  new LoginMessages();
+    }
+    @Value("${message.welcome}") String welcome;
+    public String welcome() {
+        return welcome;
+    }
+@Value("${message.provideUsername}") String provideUsername;
     public String getUsernameMessage() {
-        return "podaj nazwe uzytkownika:";
+        return provideUsername;
     }
 
     public void setUsername(String username) {
-        this.username=username;
+        user = username;
     }
-
+@Value("${message.loggedAsMessage}") String loggedAsMessage;
     public String getLoggedAsMessage() {
-        return "Zalogowany jako "+ this.username;
+        return loggedAsMessage + " " + user;
     }
 }
