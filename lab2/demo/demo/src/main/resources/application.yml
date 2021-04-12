@@ -1,6 +1,7 @@
 database:
   mysql:
-    url: localhost
-    user: sa
-    password: password
-    timeout: 90
+    method:
+      welcome: Witaj
+      provideMessage: podaj nazwe uzytkownika
+      loggedAsMessage: Zalogowany jako admin
+
