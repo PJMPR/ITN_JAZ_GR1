@@ -1,36 +1,36 @@
 package com.example.demo;
 
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class LoginMessages {
 
-    private String selectedUser;
+    String user;
 
-    @Value("${message.welcome}")
-    String welcomeMessage;
-
-    @Value("${message.prompt}")
-    String promptMessage;
-
-    @Value("${message.loggedAs}")
-    String loggedAsMessage;
-
-    public String welcome(){
-        return welcomeMessage;
+    public LoginMessages loginMessages() {
+        return new LoginMessages();
     }
 
-    public String getUsernameMessage(){
-        return promptMessage;
+    @Value("${message.welcome}") String welcome;
+    public String welcome() {
+        return welcome;
     }
 
-    public void setUsername(String username){
-        selectedUser = username;
+    @Value("${message.provideUsername}") String provideUsername;
+    public String getUsernameMessage() {
+        return provideUsername;
     }
 
-    public String getLoggedAsMessage(){
-        return loggedAsMessage + " " + selectedUser;
+    public void setUsername(String username) {
+        user = username;
+
     }
 
+    @Value("${message.loggedAsMessage}") String loggedAsMessage;
+    public String getLoggedAsMessage() {
+        return loggedAsMessage + " " + user;
+    }
 }
