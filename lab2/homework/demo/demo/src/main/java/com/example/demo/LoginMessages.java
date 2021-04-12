@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 public class LoginMessages {
     private String username;
     public String welcome() {
-        return "Witaj";
+        return "Welcome";
     }
 
     public String getUsernameMessage() {
-        return "Podaj nazwe uzytkownika: ";
+        return "podaj nazwe uzytkownika:";
     }
 
     public void setUsername(String username) {
