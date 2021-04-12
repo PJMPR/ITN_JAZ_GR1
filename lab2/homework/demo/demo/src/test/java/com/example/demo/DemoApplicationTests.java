@@ -16,10 +16,10 @@ Utworzyc profile dla konfiguracji (application-pl.properties ew. yml)
 class DemoApplicationTests {
 
 	@Autowired
-	/*
-	 * Utworzyć klase DialogService i zarajestrować ją w kontenerze DI
-	 * */
-			DialogService dialog;
+			/*
+			* Utworzyć klase DialogService i zarajestrować ją w kontenerze DI
+			* */
+	DialogService dialog;
 
 	@Test
 	void contextLoads() {
