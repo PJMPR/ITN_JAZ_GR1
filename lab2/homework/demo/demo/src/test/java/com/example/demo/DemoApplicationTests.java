@@ -23,7 +23,7 @@ class DemoApplicationTests {
 
 	@Test
 	void contextLoads() {
-		/*
+		/*/home/tomek/IdeaProjects/ITN_JAZ_GR1/lab2/homework/demo
 		 * Utworzyć klase LoginMessages i zarajestrować ją w kontenerze DI
 		 * */
 		LoginMessages messages = dialog.getLoginMessages();
