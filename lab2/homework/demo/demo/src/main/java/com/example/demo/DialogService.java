@@ -1,16 +1,15 @@
 package com.example.demo;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class DialogService {
-    private final LoginMessages message;
 
-    public DialogService(LoginMessage message) {
-        this.message = messages;
-    }
+    private final LoginMessages messages;
 
-    public LoginMessages getLoginMessages() {
-        return message;
-    }
+//    @Bean
+    public DialogService(LoginMessages messages) {this.messages = messages;}
+
+    public LoginMessages getLoginMessages() {return messages;}
 }
