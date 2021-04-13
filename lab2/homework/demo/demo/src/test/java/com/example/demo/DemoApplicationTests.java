@@ -37,7 +37,7 @@ class DemoApplicationTests {
 		/*
 		 * login messages ma metodę która wyswietla prośbę o wprowadzenie nazwy uzytkownika
 		 * */
-		assertThat(provideUsername, equalTo("podaj nazwe uzytkownika:"));
+		assertThat(provideUsername, equalTo("Podaj nazwe uzytkownika:"));
 
 		/*
 		 * login messages ma metodę która pozwala ustawić login
@@ -77,7 +77,7 @@ class DemoApplicationEngTests {
 		assertThat(welcome, equalTo("Welcome"));
 		String provideUsername = messages.getUsernameMessage();
 
-		assertThat(provideUsername, equalTo("provide username:"));
+		assertThat(provideUsername, equalTo("Provide username:"));
 		messages.setUsername("admin");
 		String loggedAsMessage = messages.getLoggedAsMessage();
 		assertThat(loggedAsMessage, equalTo("Logged as admin"));
