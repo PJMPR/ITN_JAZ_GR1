@@ -19,4 +19,4 @@ public class LoginMessages {
     @Value("${message.username}") String user;
     public String getLoggedAsMessage() {return user + " " + username;}
 }
-© 2021 GitHub, Inc.
+
