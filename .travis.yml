@@ -1,6 +1,6 @@
 language: java
 jdk:
-  - openjdk11
+  - openjdk16
 script:
   - cd lab2/homework/demo/demo
   - mvn test

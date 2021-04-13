@@ -1,9 +1,10 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Component
+@Configuration
 public class LoginMessages {
     String username;
 
@@ -11,19 +12,19 @@ public class LoginMessages {
         this.username = username;
     }
 
-    @Value("${$database.mysql.method.welcome}") String welcome;
+    @Value("${method.welcome}") String welcome;
     public String welcome(){
         return welcome;
     }
 
-    @Value("${$database.mysql.method.provideMessage}") String provideMessage;
+    @Value("${method.provideMessage}") String provideMessage;
     public String getUsernameMessage(){
         return provideMessage;
     }
 
-    @Value("${$database.mysql.method.loggedAsMessage}") String loggedAsMessage;
+    @Value("${method.loggedAsMessage}") String loggedAsMessage;
     public String getLoggedAsMessage(){
-        return loggedAsMessage + "" + username;
+        return loggedAsMessage + " " + username;
     }
 
 }
