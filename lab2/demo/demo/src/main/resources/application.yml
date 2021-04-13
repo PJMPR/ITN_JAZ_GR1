@@ -1,7 +1,2 @@
-database:
-  mysql:
-    method:
-      welcome: Witaj
-      provideMessage: podaj nazwe uzytkownika
-      loggedAsMessage: Zalogowany jako admin
+
 

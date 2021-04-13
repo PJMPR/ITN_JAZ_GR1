@@ -11,10 +11,6 @@ public class LoginMessages {
         this.username = username;
     }
 
-    public LoginMessages loginMessages(){
-        return new LoginMessages();
-    }
-
     @Value("${$database.mysql.method.welcome}") String welcome;
     public String welcome(){
         return welcome;
