@@ -1,70 +1,91 @@
 package com.example.demo;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.util.Assert;
+import org.springframework.test.context.ActiveProfiles;
 
-import java.util.List;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 @SpringBootTest
-class DemoApplicationTests extends Mockito {
+@ActiveProfiles(profiles = "pl")
+/*
+Utworzyc profile dla konfiguracji (application-pl.properties ew. yml)
+* */
+class DemoApplicationTests {
+
+	@Autowired
+	/*
+	 * Utworzyć klase DialogService i zarajestrować ją w kontenerze DI
+	 * */
+			DialogService dialog;
 
 	@Test
-	void annotationsTest() {
+	void contextLoads() {
+		/*
+		 * Utworzyć klase LoginMessages i zarajestrować ją w kontenerze DI
+		 * */
+		LoginMessages messages = dialog.getLoginMessages();
 
-		//Utwórz klase Person
-		Person person = new Person();
-		person.setName("Jan");
-		Assert.isTrue(person.getName() == "Jan");
+		/*
+		 * login messages ma metodę która wyswietla powitanie
+		 * */
+		String welcome = messages.welcome();
+		assertThat(welcome, equalTo("Witaj"));
+		String provideUsername = messages.getUsernameMessage();
+		/*
+		 * login messages ma metodę która wyswietla prośbę o wprowadzenie nazwy uzytkownika
+		 * */
+		assertThat(provideUsername, equalTo("Podaj nazwe uzytkownika:"));
 
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("com.example.demo");
-		context.refresh();
+		/*
+		 * login messages ma metodę która pozwala ustawić login
+		 * */
+		messages.setUsername("admin");
 
-		//Utwórz klase PersonDb. Oznacz ją jako komponent
-		//pobierz ją z kontekstu DI Springa
-		PersonDb db = context.getBean(Persondb.class);
-		Assert.isInstanceOf(Person[].class, db.getPersonArray());
 
-		//Utwórz klasę PersonRepository. Oznacz ją jako komponent.
-		//pobierz ją z kontekstu DI Springa
-		PersonRepository repository = context.getBean(PersonRepository.class);
+		/*
+		 * login messages ma metodę która wyswietla zalogowanego uzytkownika
+		 * */
+		String loggedAsMessage = messages.getLoggedAsMessage();
+		assertThat(loggedAsMessage, equalTo("Zalogowany jako admin"));
 
-		//Zapisz osobę do bazy
-		repository.save(person);
+		messages.setUsername("jankowal");
 
-		//pobranie obiektu PersonDb z repository
-		db = repository.getDb();
-		// z PersonDb bierzemy kolekcje osób
-		Person[] list = db.getPersonArray();
-		//sprawdzamy czy zapisana osoba jest w kolekcji
-		//sprawdzamy czy kolekcja ma rozmiar 1000
-		Assert.isTrue(list.length==1000);
-		Assert.isTrue(list[0]==person);
+		loggedAsMessage = messages.getLoggedAsMessage();
 
+		assertThat(loggedAsMessage, equalTo("Zalogowany jako jankowal"));
 	}
+}
 
-	void beanConfigTest(){
-		Person person = new Person();
-		person.setName("Jan");
-		Assert.isTrue(person.getName() == "Jan");
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
+@SpringBootTest
+@ActiveProfiles(profiles = "en")/*
+Utworzyc profile dla konfiguracji (application-en.properties ew. yml)
+* */
+class DemoApplicationEngTests {
 
+	@Autowired
+	DialogService dialog;
 
-		PersonDb db = context.getBean(Persondb.class);
-		Assert.isInstanceOf(Person[].class, db.getPersonArray());
+	@Test
+	void contextLoads() {
 
-		PersonRepository repository = context.getBean(PersonRepository.class);
+		LoginMessages messages = dialog.getLoginMessages();
 
-		repository.save(person);
-		db = repository.getDb();
-		Person[] list = db.getPersonArray();
-		Assert.isTrue(list.length==1000);
-		Assert.isTrue(list[0]==person);
+		String welcome = messages.welcome();
+		assertThat(welcome, equalTo("Welcome"));
+		String provideUsername = messages.getUsernameMessage();
+
+		assertThat(provideUsername, equalTo("Provide username:"));
+		messages.setUsername("admin");
+		String loggedAsMessage = messages.getLoggedAsMessage();
+		assertThat(loggedAsMessage, equalTo("Logged as admin"));
+
+		messages.setUsername("jankowal");
+
+		loggedAsMessage = messages.getLoggedAsMessage();
+
+		assertThat(loggedAsMessage, equalTo("Logged as jankowal"));
 	}
-
 }
