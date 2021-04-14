@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 @Configuration
 public class DialogService {
@@ -11,6 +11,7 @@ public class DialogService {
     public DialogService(LoginMessages messages) {
         this.messages = messages;
     }
+
     public LoginMessages getLoginMessages() {
         return messages;
     }
