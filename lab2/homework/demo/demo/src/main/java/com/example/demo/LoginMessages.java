@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LoginMessages {
 
-  private String username;
+   String username;
 
     @Value("${message.welcome}") String welcome;
     public String welcome() {
