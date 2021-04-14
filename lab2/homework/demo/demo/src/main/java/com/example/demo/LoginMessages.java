@@ -2,20 +2,29 @@ package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 @Configuration
 public class LoginMessages {
-
     String username;
 
-    @Value("${message.welcome}") String welcome;
-    public String welcome() {return welcome;}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-    @Value("${message.provideUsername}") String provideUsername;
-    public String getUsernameMessage() {return provideUsername;}
+    @Value("${method.welcome}") String welcome;
+    public String welcome(){
+        return welcome;
+    }
 
-    public void setUsername(String username) {this.username = username;}
+    @Value("${method.provideMessage}") String provideMessage;
+    public String getUsernameMessage(){
+        return provideMessage;
+    }
 
-    @Value("${message.username}") String user;
-    public String getLoggedAsMessage() {return user + " " + username;}
+    @Value("${method.loggedAsMessage}") String loggedAsMessage;
+    public String getLoggedAsMessage(){
+        return loggedAsMessage + " " + username;
+    }
+
 }
