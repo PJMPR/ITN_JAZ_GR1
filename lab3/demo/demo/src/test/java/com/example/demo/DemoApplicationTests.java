@@ -34,6 +34,10 @@ class HelloControllerTest {
 
 	@Test
 	public void testPathAndQueryParams() throws Exception {
+		/*
+		* na adres localhost:8080/homework dodać parametry path'a (@PathVariable) oraz parametr query (@RequestParam) o nazwie 'query'
+		*
+		* */
 		mvc.perform(MockMvcRequestBuilders.get("/homework/test?query=test").accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
 				.andExpect(content().string("path:test query:test"));
@@ -52,6 +56,9 @@ class HelloControllerTest {
 		person.setSurname("Nowak");
 
 
+		/*
+		* na adres localhost:8080/homework/person metodą post wysyłamy jsona i go spowrotem otrzymujemy w odpowiedzi
+		* */
 		mvc.perform(post("/homework/person")
 				.contentType("application/json")
 				.content(objectMapper.writeValueAsString(person)))
@@ -61,7 +68,9 @@ class HelloControllerTest {
 				.andExpect(jsonPath("$.age").value(12))
 		;
 
-
+		/*
+		 * na adres localhost:8080/homework/person/1 metodą put (wykorzystujemy @PathVariable) wysyłamy jsona i go spowrotem otrzymujemy w odpowiedzi
+		 * */
 		mvc.perform(put("/homework/person/1")
 				.contentType("application/json")
 				.content(objectMapper.writeValueAsString(person)))
@@ -83,6 +92,9 @@ class HelloControllerTest {
 
 	@Test
 	public void testDeletePerson() throws Exception{
+		/*
+		* na adres localhost:8080/homework/person/1 (..2,3) metodą delete dostajemy jedynie status odpowiedzi 200 (ok)
+		* */
 		mvc.perform(delete("/homework/person/1")).andExpect(status().isOk());
 		mvc.perform(delete("/homework/person/2")).andExpect(status().isOk());
 		mvc.perform(delete("/homework/person/3")).andExpect(status().isOk());
