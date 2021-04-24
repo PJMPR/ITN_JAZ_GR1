@@ -44,8 +44,8 @@ public class HelloController {
     }
 
     @GetMapping("test/{some_value}")
-    public ResponseEntity pathParams(@PathVariable("some_value") String pathParam){
-        return ResponseEntity.ok(pathParam);
+    public ResponseEntity pathParams(@PathVariable("some_value") String pathParam, @RequestParam("name") String name){
+        return ResponseEntity.ok(pathParam+name);
     }
 
     @GetMapping("test/query")
