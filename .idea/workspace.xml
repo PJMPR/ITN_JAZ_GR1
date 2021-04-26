@@ -4,7 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5db1d784-4d13-4b31-960d-3c454365b02b" name="Default Changelist" comment="" />
+    <list default="true" id="5db1d784-4d13-4b31-960d-3c454365b02b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/ITN_JAZ_GR1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/JAZ_zjazd_3.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/Wykład_JAZ_180421.pptx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/resources/application-pl.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/JAZ.postman_collection.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/.mvn/wrapper/MavenWrapperDownloader.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/java/com/example/demo/DemoApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/java/com/example/demo/ServletInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/java/com/example/demo/contract/Car.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/java/com/example/demo/contract/Person.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/java/com/example/demo/controllers/HelloController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/resources/person.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/demo/demo/src/test/java/com/example/demo/DemoApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.travis.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/java/com/example/demo/DialogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/java/com/example/demo/DialogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/java/com/example/demo/LoginMessages.java" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/java/com/example/demo/LoginMessages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/resources/application-en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/resources/application-en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/homework/demo/demo/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/demo/demo/src/main/resources/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,15 +61,16 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lab2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="JUnit.DemoApplicationTests.annotationsTest">
+  <component name="RunManager" selected="Spring Boot.DemoApplication">
     <configuration name="DemoApplicationTests.annotationsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="demo" />
       <extension name="coverage">
@@ -84,6 +112,7 @@
       <workItem from="1618040357088" duration="596000" />
       <workItem from="1618252983309" duration="329000" />
       <workItem from="1618246139941" duration="28000" />
+      <workItem from="1619354378430" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="lab1">
       <created>1616444516014</created>
