@@ -26,6 +26,6 @@ public class HomeworkController {
 
         @GetMapping("{path}")
         public ResponseEntity pathParam(@PathVariable("path") String path, @RequestParam("query") String query){
-            return ResponseEntity.ok("path:" + path + " query:" + query)
+            return ResponseEntity.ok("path:" + path + " query:" + query);
         }
 }
