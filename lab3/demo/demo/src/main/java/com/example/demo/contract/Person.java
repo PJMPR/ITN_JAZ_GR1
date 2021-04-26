@@ -1,5 +1,7 @@
 package com.example.demo.contract;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Person {
     String name;
     String surname;
