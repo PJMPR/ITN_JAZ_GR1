@@ -1,70 +1,102 @@
 package com.example.demo;
 
+import com.example.demo.contract.Person;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.util.Assert;
+import org.springframework.boot.test.json.BasicJsonTester;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.util.List;
+import java.io.File;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-class DemoApplicationTests extends Mockito {
+@AutoConfigureMockMvc
+class HelloControllerTest {
+
+	@Autowired
+	private ObjectMapper objectMapper;
+	@Autowired
+	private MockMvc mvc;
+	BasicJsonTester json = new BasicJsonTester(getClass()) ;
 
 	@Test
-	void annotationsTest() {
+	public void testPathAndQueryParams() throws Exception {
+		/*
+		 * na adres localhost:8080/homework dodać parametry path'a (@PathVariable) oraz parametr query (@RequestParam) o nazwie 'query'
+		 *
+		 * */
+		mvc.perform(MockMvcRequestBuilders.get("/homework/test?query=test").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().string("path:test query:test"));
 
-		//Utwórz klase Person
+		mvc.perform(MockMvcRequestBuilders.get("/homework/test1?query=test1").accept(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content().string("path:test1 query:test1"));
+	}
+
+	@Test
+	public void testPostAndPutMethod()throws Exception{
+
 		Person person = new Person();
+		person.setAge(12);
 		person.setName("Jan");
-		Assert.isTrue(person.getName() == "Jan");
+		person.setSurname("Nowak");
 
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
-		context.scan("com.example.demo");
-		context.refresh();
 
-		//Utwórz klase PersonDb. Oznacz ją jako komponent
-		//pobierz ją z kontekstu DI Springa
-		PersonDb db = context.getBean(Persondb.class);
-		Assert.isInstanceOf(Person[].class, db.getPersonArray());
+		/*
+		 * na adres localhost:8080/homework/person metodą post wysyłamy jsona i go spowrotem otrzymujemy w odpowiedzi
+		 * */
+		mvc.perform(post("/homework/person")
+				.contentType("application/json")
+				.content(objectMapper.writeValueAsString(person)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name").value("Jan"))
+				.andExpect(jsonPath("$.surname").value("Nowak"))
+				.andExpect(jsonPath("$.age").value(12))
+		;
 
-		//Utwórz klasę PersonRepository. Oznacz ją jako komponent.
-		//pobierz ją z kontekstu DI Springa
-		PersonRepository repository = context.getBean(PersonRepository.class);
-
-		//Zapisz osobę do bazy
-		repository.save(person);
-
-		//pobranie obiektu PersonDb z repository
-		db = repository.getDb();
-		// z PersonDb bierzemy kolekcje osób
-		Person[] list = db.getPersonArray();
-		//sprawdzamy czy zapisana osoba jest w kolekcji
-		//sprawdzamy czy kolekcja ma rozmiar 1000
-		Assert.isTrue(list.length==1000);
-		Assert.isTrue(list[0]==person);
+		/*
+		 * na adres localhost:8080/homework/person/1 metodą put (wykorzystujemy @PathVariable) wysyłamy jsona i go spowrotem otrzymujemy w odpowiedzi
+		 * */
+		mvc.perform(put("/homework/person/1")
+				.contentType("application/json")
+				.content(objectMapper.writeValueAsString(person)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name").value("Jan"))
+				.andExpect(jsonPath("$.surname").value("Nowak"))
+				.andExpect(jsonPath("$.age").value(12))
+		;
+		mvc.perform(put("/homework/person/2")
+				.contentType("application/json")
+				.content(objectMapper.writeValueAsString(person)))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.name").value("Jan"))
+				.andExpect(jsonPath("$.surname").value("Nowak"))
+				.andExpect(jsonPath("$.age").value(12))
+		;
 
 	}
 
-	void beanConfigTest(){
-		Person person = new Person();
-		person.setName("Jan");
-		Assert.isTrue(person.getName() == "Jan");
-		ApplicationContext context = new ClassPathXmlApplicationContext("beans.xml");
-
-
-		PersonDb db = context.getBean(Persondb.class);
-		Assert.isInstanceOf(Person[].class, db.getPersonArray());
-
-		PersonRepository repository = context.getBean(PersonRepository.class);
-
-		repository.save(person);
-		db = repository.getDb();
-		Person[] list = db.getPersonArray();
-		Assert.isTrue(list.length==1000);
-		Assert.isTrue(list[0]==person);
+	@Test
+	public void testDeletePerson() throws Exception{
+		/*
+		 * na adres localhost:8080/homework/person/1 (..2,3) metodą delete dostajemy jedynie status odpowiedzi 200 (ok)
+		 * */
+		mvc.perform(delete("/homework/person/1")).andExpect(status().isOk());
+		mvc.perform(delete("/homework/person/2")).andExpect(status().isOk());
+		mvc.perform(delete("/homework/person/3")).andExpect(status().isOk());
 	}
-
 }
