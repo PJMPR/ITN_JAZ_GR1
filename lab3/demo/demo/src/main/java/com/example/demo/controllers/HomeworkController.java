@@ -31,7 +31,7 @@ public class HomeworkController {
         return ResponseEntity.ok(person);
     }
 
-    @DeleteMapping("person") // localhost:8080/homework/person/1
+    @DeleteMapping("person/{path}") // localhost:8080/homework/person/1
     public ResponseEntity<String> person(
             @PathVariable("path") String path){
         return ResponseEntity.ok("");
