@@ -5,28 +5,30 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoginMessages {
+    private String selectedUser;
 
-    @Value("${msg.welcome}")
-    String welcome;
-    @Value("${msg.provideusername}")
-    String usernameMessage;
-    String username;
-    @Value("${msg.loggedas}")
+    @Value("${message.welcome}")
+    String welcomeMessage;
+
+    @Value("${message.prompt}")
+    String promptMessage;
+
+    @Value("${message.loggedAs}")
     String loggedAsMessage;
 
-    public String welcome() {
-        return welcome;
+    public String welcome(){
+        return welcomeMessage;
     }
 
-    public String getUsernameMessage() {
-        return usernameMessage;
+    public String getUsernameMessage(){
+        return promptMessage;
     }
 
-    public void setUsername(String admin) {
-        username=admin;
+    public void setUsername(String username){
+        selectedUser = username;
     }
 
-    public String getLoggedAsMessage() {
-        return loggedAsMessage+" "+username;
+    public String getLoggedAsMessage(){
+        return loggedAsMessage + " " + selectedUser;
     }
 }

@@ -4,14 +4,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DialogService {
+    private LoginMessages messages;
 
-    LoginMessages messages;
-
-    public DialogService(LoginMessages messages) {
-        this.messages = messages;
+    public DialogService(LoginMessages m) {
+        messages = m;
     }
 
-    public LoginMessages getLoginMessages() {
+    public LoginMessages getLoginMessages(){
         return messages;
     }
 }
