@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 
 
-import javax.websocket.server.PathParam;
-
 @RestController
 @RequestMapping("homework")
 public class HomeworkController {
@@ -19,5 +17,15 @@ public class HomeworkController {
         @PutMapping("person/{count}")
         public ResponseEntity<Person> savePerson(@PathVariable("count") String count, @RequestBody Person person){
             return ResponseEntity.ok(person);
+        }
+
+        @DeleteMapping("person/{id}")
+        public ResponseEntity<String> deletePerson(@PathVariable("id") String id){
+            return ResponseEntity.ok("");
+        }
+
+        @GetMapping("{path}")
+        public ResponseEntity pathParam(@PathVariable("path") String path, @RequestParam("query") String query){
+            return ResponseEntity.ok("path:" + path + " query:" + query)
         }
 }
