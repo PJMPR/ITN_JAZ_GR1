@@ -37,7 +37,7 @@ public class CarsApiTests {
 
         mvc.perform(MockMvcRequestBuilders.get("/cars/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.model").value("BMV"))
+                .andExpect(jsonPath("$.model").value("BMW"))
                 .andExpect(jsonPath("$.registrationNumber").value("GD1234"))
                 .andExpect(jsonPath("$.milleage").value(200))
                 .andExpect(jsonPath("$.hasAccidents").value(false))
@@ -76,8 +76,11 @@ public class CarsApiTests {
                 .contentType("application/json")
                 .content(objectMapper.writeValueAsString(car3)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.model").value("BMW3"))
         ;
+
+        mvc.perform(MockMvcRequestBuilders.get("/cars/1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.model").value("BMW3"));
 
         mvc.perform(put("/cars/60")
                 .contentType("application/json")
@@ -85,11 +88,11 @@ public class CarsApiTests {
                 .andExpect(status().isNotFound());
 
 
-        mvc.perform(delete("/cars/1")).andExpect(status().isOk());
+        mvc.perform(delete("/cars/1")).andExpect(status().isNoContent());
         mvc.perform(delete("/cars/1")).andExpect(status().isNotFound());
-        mvc.perform(delete("/cars/2")).andExpect(status().isOk());
+        mvc.perform(delete("/cars/2")).andExpect(status().isNoContent());
         mvc.perform(delete("/cars/2")).andExpect(status().isNotFound());
-        mvc.perform(delete("/cars/3")).andExpect(status().isOk());
+        mvc.perform(delete("/cars/3")).andExpect(status().isNoContent());
         mvc.perform(delete("/cars/3")).andExpect(status().isNotFound());
     }
 }
