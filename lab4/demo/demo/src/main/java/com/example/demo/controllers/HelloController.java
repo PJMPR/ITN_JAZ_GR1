@@ -11,6 +11,10 @@ import javax.websocket.server.PathParam;
 @RequestMapping("hello") // localhost:8080/hello
 public class HelloController {
 
+    @GetMapping("exception")
+    public ResponseEntity throwException() throws Exception {
+        throw new Exception("testowy blad");
+    }
 
     @GetMapping("test") // localhost:8080/hello/test z metoda HttpGet
     public ResponseEntity<String> test() {
