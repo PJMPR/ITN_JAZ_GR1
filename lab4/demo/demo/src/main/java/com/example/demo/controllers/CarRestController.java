@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("car") // localhost:8080/car
+@RequestMapping("cars") // localhost:8080/cars
 public class CarRestController {
 
     final
