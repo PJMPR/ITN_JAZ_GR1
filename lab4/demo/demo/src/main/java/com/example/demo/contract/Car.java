@@ -7,6 +7,7 @@ public class Car {
     private int milleage;
     private boolean hasAccidents;
     private double price;
+    private int ID;
 
     public Car(String model, String registrationNumber, int milleage, boolean hasAccidents, double price) {
         this.model = model;
@@ -54,5 +55,13 @@ public class Car {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int id) {
+        this.ID = id;
     }
 }
