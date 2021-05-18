@@ -14,7 +14,7 @@ public class Car {
         return ID;
     }
 
-    public void setID() {
+    public void setID(int ID) {
         this.ID = ID;
     }
 
