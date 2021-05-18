@@ -23,6 +23,14 @@ public class CarService {
             return result.get();
         return null;
     }
+    
+    public void saveCar(Car car){
+        OptionalInt lastId = db.stream().map(p->p.getID()).mapToInt(x->x).max();
+        if(!lastId.isPresent())
+            car.setID(1);
+        else car.setID(lastId.getAsInt()+1);
+        db.add(car);
+    }
 
     public Car Update(int id, Car car){
         Car result = getCarById(id);
@@ -35,25 +43,18 @@ public class CarService {
         return result;
     }
 
-    public void saveCar(Car car){
-        OptionalInt lastId = db.stream().map(p->p.getID()).mapToInt(x->x).max();
-        if(!lastId.isPresent())
-            car.setID(1);
-        else car.setID(lastId.getAsInt()+1);
-        db.add(car);
-    }
-
-    private Car getCarById(int id2) {
-        Optional<Car> fromList = db.stream().filter(p -> p.getID() == id2).findFirst();
-        if (!fromList.isPresent()) return null;
-        Car result = fromList.get();
-        return result;
-    }
 
     public Car delete(int id){
         Car result = getCarById(id);
         if (result == null) return null;
         db.remove(result);
+        return result;
+    }
+    
+    private Car getCarById(int id2) {
+        Optional<Car> fromList = db.stream().filter(p -> p.getID() == id2).findFirst();
+        if (!fromList.isPresent()) return null;
+        Car result = fromList.get();
         return result;
     }
 }
