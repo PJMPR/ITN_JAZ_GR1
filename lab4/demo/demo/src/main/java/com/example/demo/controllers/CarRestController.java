@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("cars") //localhost:8080/cars
 public class CarRestController {
-
     final CarService serviceCar;
 
     public CarRestController(CarService serviceCar){
@@ -25,27 +24,6 @@ public class CarRestController {
         return ResponseEntity.ok(serviceCar.getAllCar());
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable("id") int id, @RequestBody Car car){
-
-        Car result = serviceCar.Update(id, car);
-        if(result == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping()
-    public ResponseEntity<Car> saveCar(@RequestBody Car car){
-        serviceCar.saveCar(car);
-        return ResponseEntity.noContent().build();
-    }
-
-    @DeleteMapping("{id}")
-    public ResponseEntity deleteCar(@PathVariable("id") int id){
-        Car deletedCar = serviceCar.delete(id);
-        if(deletedCar==null) return ResponseEntity.notFound().build();
-        return ResponseEntity.noContent().build();
-    }
-
     @GetMapping("{id}")
     public ResponseEntity<Car> getByIdCar(@PathVariable("id") int id){
         Car result = serviceCar.getByIdCar(id);
@@ -54,4 +32,23 @@ public class CarRestController {
         return ResponseEntity.ok(result);
     }
 
+    @PostMapping()
+    public ResponseEntity<Car> saveCar(@RequestBody Car car){
+        serviceCar.saveCar(car);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("{id}")
+    public ResponseEntity<Car> updateCar(@PathVariable("id") int id, @RequestBody Car car){
+
+        Car result = serviceCar.Update(id, car);
+        if(result == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity deleteCar(@PathVariable("id") int id){
+        Car deletedCar = serviceCar.delete(id);
+        if(deletedCar==null) return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
+    }
 }
