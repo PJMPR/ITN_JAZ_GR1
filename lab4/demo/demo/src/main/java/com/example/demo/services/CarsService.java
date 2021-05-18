@@ -1,53 +1,59 @@
-package com.example.demo.controllers;
+package com.example.demo.services;
 
 import com.example.demo.contract.Car;
-import com.example.demo.services.CarsService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
-@RestController
-@RequestMapping("cars")
-public class CarsController {
+@Service
+public class CarsService {
 
-    final CarsService service;
+    private List<Car> db = new ArrayList<Car>();
 
-    public CarsController(CarsService service) {
-        this.service = service;
+    public java.util.List<Car> getAll(){
+        return this.db;
     }
 
-    @GetMapping()
-    public ResponseEntity<List<Car>> getAll(){
-        return ResponseEntity.ok(service.getAll());
+    public Car getById(int id){
+        Optional<Car> result =  db.stream().filter(p->p.getID()==id).findFirst();
+        if(result.isPresent())
+            return result.get();
+        return null;
     }
 
-    @GetMapping("{id}")
-    public ResponseEntity<Car> getById(@PathVariable("id") int id){
-        Car result = service.getById(id);
-        if(result==null)
-            return ResponseEntity.notFound().build();
-        return ResponseEntity.ok(result);
+    public void saveCar(Car car){
+        OptionalInt lastId = db.stream().map(p->p.getID()).mapToInt(x->x).max();
+        if(!lastId.isPresent())
+            car.setID(1);
+        else car.setID(lastId.getAsInt()+1);
+        db.add(car);
     }
 
-    @PostMapping()
-    public ResponseEntity<Car> saveCar(@RequestBody Car car){
-        service.saveCar(car);
-        return ResponseEntity.noContent().build();
+    public Car update(int id, Car car){
+        Car result = getCarById(id);
+        if (result == null) return null;
+        result.setModel(car.getModel());
+        result.setRegistrationNumber(car.getRegistrationNumber());
+        result.setMilleage(car.getMilleage());
+        result.setHasAccidents(car.isHasAccidents());
+        result.setPrice(car.getPrice());
+        return result;
     }
 
-    @PutMapping("{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable("id") int id, @RequestBody Car car){
-
-        Car result = service.update(id, car);
-        if(result == null) return ResponseEntity.notFound().build();
-        return ResponseEntity.ok().build();
+    public Car delete(int id){
+        Car result = getCarById(id);
+        if (result == null) return null;
+        db.remove(result);
+        return result;
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity deleteCar(@PathVariable("id") int id){
-        Car deletedCar = service.delete(id);
-        if(deletedCar==null) return ResponseEntity.notFound().build();
-        return ResponseEntity.noContent().build();
+    private Car getCarById(int id) {
+        Optional<Car> fromList = db.stream().filter(p -> p.getID() == id).findFirst();
+        if (!fromList.isPresent()) return null;
+        Car result = fromList.get();
+        return result;
     }
 }
