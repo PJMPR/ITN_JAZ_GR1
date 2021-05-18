@@ -17,6 +17,13 @@ public class Car {
     public void setID(int ID) {
         this.ID = ID;
     }
+    public Car(String model, String registrationNumber, int milleage, boolean hasAccidents, double price) {
+        this.model = model;
+        this.registrationNumber = registrationNumber;
+        this.milleage = milleage;
+        this.hasAccidents = hasAccidents;
+        this.price = price;
+    }
 
     public String getModel() {
         return model;
