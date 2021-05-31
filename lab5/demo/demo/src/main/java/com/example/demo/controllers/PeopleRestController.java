@@ -2,7 +2,6 @@ package com.example.demo.controllers;
 
 import com.example.demo.contract.Person;
 import com.example.demo.services.PeopleDataService;
-import com.example.demo.services.PeopleService;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

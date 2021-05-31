@@ -1,19 +1,28 @@
 package com.example.demo.contract;
 
+import javax.persistence.*;
+
+@Entity
+@NamedQuery(name = "Car.getAllByModel",
+        query = "select p from Person p where p.name = ?1")
 public class Car {
 
-    private String model;
-    private String registrationNumber;
-    private int milleage;
-    private boolean hasAccidents;
-    private double price;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    int ID;
+    String model;
+    String registrationNumber;
+    int milleage;
+    boolean hasAccidents;
+    double price;
 
-    public Car(String model, String registrationNumber, int milleage, boolean hasAccidents, double price) {
-        this.model = model;
-        this.registrationNumber = registrationNumber;
-        this.milleage = milleage;
-        this.hasAccidents = hasAccidents;
-        this.price = price;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getModel() {
@@ -55,4 +64,8 @@ public class Car {
     public void setPrice(double price) {
         this.price = price;
     }
+
+
+
+
 }
