@@ -12,7 +12,7 @@ public class Car {
     private int milleage;
     private boolean hasAccidents;
     private double price;
-    @Id;
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int ID;
 
