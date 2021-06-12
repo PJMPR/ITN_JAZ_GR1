@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import com.example.demo.contract.Car;
-import com.example.demo.contract.Person;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@SpringBootTest()
-@AutoConfigureMockMvc
-@TestPropertySource(
-        locations = "classpath:application-integrationtests.properties")
-public class CarsApiTests {
+public abstract class CarsApiTestsBase {
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -28,7 +23,6 @@ public class CarsApiTests {
     private MockMvc mvc;
     BasicJsonTester json = new BasicJsonTester(getClass()) ;
 
-    @Test
     public void testPostMethod()throws Exception{
 
         Car car = new Car("BMW","GD1234",200,false,20000);

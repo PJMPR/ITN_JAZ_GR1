@@ -1,10 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.contract.Car;
-import com.example.demo.contract.Person;
 import com.example.demo.services.CarService;
-import com.fasterxml.jackson.annotation.JsonTypeId;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

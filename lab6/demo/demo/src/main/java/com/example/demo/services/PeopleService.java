@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.contract.Person;
+import com.example.demo.contract.PersonDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,47 +11,47 @@ import java.util.OptionalInt;
 @Service
 public class PeopleService {
 
-    private List<Person> db = new ArrayList<Person>();
+    private List<PersonDto> db = new ArrayList<PersonDto>();
 
-    public List<Person> getAll(){
+    public List<PersonDto> getAll(){
         return this.db;
     }
 
-    public Person getById(int id){
-      Optional<Person> result =  db.stream().filter(p->p.getID()==id).findFirst();
+    public PersonDto getById(int id){
+      Optional<PersonDto> result =  db.stream().filter(p->p.getID()==id).findFirst();
       if(result.isPresent())
           return result.get();
       return null;
     }
 
-    public void savePerson(Person person){
+    public void savePerson(PersonDto personDto){
         OptionalInt lastId = db.stream().map(p->p.getID()).mapToInt(x->x).max();
         if(!lastId.isPresent())
-            person.setID(1);
-        else person.setID(lastId.getAsInt()+1);
-        db.add(person);
+            personDto.setID(1);
+        else personDto.setID(lastId.getAsInt()+1);
+        db.add(personDto);
     }
 
-    public Person Update(int id, Person person){
-        Person result = getPersonById(id);
+    public PersonDto Update(int id, PersonDto personDto){
+        PersonDto result = getPersonById(id);
         if (result == null) return null;
-        result.setSurname(person.getSurname());
-        result.setName(person.getName());
-        result.setAge(person.getAge());
+        result.setSurname(personDto.getSurname());
+        result.setName(personDto.getName());
+        result.setAge(personDto.getAge());
         return result;
     }
 
-    public Person delete(int id){
-        Person result = getPersonById(id);
+    public PersonDto delete(int id){
+        PersonDto result = getPersonById(id);
         if (result == null) return null;
         db.remove(result);
         return result;
     }
 
-    private Person getPersonById(int id2) {
-        Optional<Person> fromList = db.stream().filter(p -> p.getID() == id2).findFirst();
+    private PersonDto getPersonById(int id2) {
+        Optional<PersonDto> fromList = db.stream().filter(p -> p.getID() == id2).findFirst();
         if (!fromList.isPresent()) return null;
-        Person result = fromList.get();
+        PersonDto result = fromList.get();
         return result;
     }
 }

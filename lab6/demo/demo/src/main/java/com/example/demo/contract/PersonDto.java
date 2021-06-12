@@ -1,18 +1,24 @@
 package com.example.demo.contract;
 
-import javax.persistence.*;
 
-@Entity
-@NamedQuery(name = "Person.getAllByName",
-        query = "select p from Person p where p.name = ?1")
-public class Person {
+import java.util.ArrayList;
+import java.util.List;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PersonDto {
+
     int ID;
     String name;
     String surname;
     int age;
+    List<AddressSummaryDto> addresses = new ArrayList<AddressSummaryDto>();
+
+    public List<AddressSummaryDto> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<AddressSummaryDto> addresses) {
+        this.addresses = addresses;
+    }
 
     public int getID() {
         return ID;

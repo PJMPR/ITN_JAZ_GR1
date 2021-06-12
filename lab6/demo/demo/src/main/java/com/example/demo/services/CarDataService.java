@@ -1,9 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.contract.Car;
-import com.example.demo.contract.Person;
 import com.example.demo.repositories.CarRepository;
-import com.example.demo.repositories.PersonRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

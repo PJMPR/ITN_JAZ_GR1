@@ -1,7 +1,7 @@
 package com.example.demo;
 
 
-import com.example.demo.contract.Person;
+import com.example.demo.contract.PersonDto;
 import com.example.demo.repositories.PersonRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -35,7 +34,7 @@ public class PersonApiTests {
     @Test
     public void save_test()throws Exception{
 
-        Person p = new Person();
+        PersonDto p = new PersonDto();
         p.setName("jan");
         p.setSurname("kowalski");
         mvc.perform(post("/people")

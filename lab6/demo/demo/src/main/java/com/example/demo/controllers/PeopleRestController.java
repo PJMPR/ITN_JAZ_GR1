@@ -1,8 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.contract.Person;
+import com.example.demo.contract.AddressDto;
+import com.example.demo.contract.PersonDto;
+import com.example.demo.model.Address;
+import com.example.demo.model.Person;
 import com.example.demo.services.PeopleDataService;
-import com.example.demo.services.PeopleService;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +25,7 @@ public class PeopleRestController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Person>> getAll(@RequestParam("name") @DefaultValue("") String name){
+    public ResponseEntity<List<PersonDto>> getAll(@RequestParam(value = "name", required = false) @DefaultValue("") String name){
 
         if(name==null || name == "")
             return ResponseEntity.ok(dataService.getAll());
@@ -31,32 +33,66 @@ public class PeopleRestController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Person> getById(@PathVariable("id") int id){
-        Person result = dataService.getById(id);
+    public ResponseEntity<PersonDto> getById(@PathVariable("id") int id){
+        PersonDto result = dataService.getById(id);
         if(result==null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(result);
     }
 
     @PostMapping()
-    public ResponseEntity<Person> savePerson(@RequestBody Person person){
+    public ResponseEntity<PersonDto> savePerson(@RequestBody PersonDto personDto){
 
-        dataService.save(person);
+        dataService.save(personDto);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable("id") int id, @RequestBody Person person){
+    public ResponseEntity<PersonDto> updatePerson(@PathVariable("id") int id, @RequestBody PersonDto personDto){
 
-        Person result = dataService.update(id, person);
+        PersonDto result = dataService.update(id, personDto);
         if(result == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity deletePerson(@PathVariable("id") int id){
-        Person deletedPerson = dataService.delete(id);
-        if(deletedPerson==null) return ResponseEntity.notFound().build();
+        PersonDto deletedPersonDto = dataService.delete(id);
+        if(deletedPersonDto ==null) return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
+    }
+    // /people/1/addresses
+    @PostMapping("{id}/addresses")
+    public ResponseEntity saveAddress(@PathVariable("id") int id, @RequestBody AddressDto address){
+        PersonDto dto = dataService.saveAddress(id, address);
+        if(dto==null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("{id}/addresses")
+    public ResponseEntity getAddresses(@PathVariable("id") int id){
+        List<AddressDto>  addresses = dataService.getAddresses(id);
+        if(addresses==null)return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(addresses);
+    }
+
+    @DeleteMapping("{id}/addresses/{address_id}")
+    public ResponseEntity deleteAddress(@PathVariable("id") int personId,
+                                        @PathVariable("address_id") int addressId){
+        AddressDto address = dataService.deleteAddress(personId, addressId);
+        if(address==null)return ResponseEntity.notFound().build();
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("{id}/addresses/{address_id}")
+    public ResponseEntity updateAddress(
+            @PathVariable("id") int personId,
+            @PathVariable("address_id") int addressId,
+            @RequestBody AddressDto addressDto
+        ){
+
+        AddressDto address = dataService.updateAddress(personId, addressId, addressDto);
+        if(address==null)return  ResponseEntity.notFound().build();
         return ResponseEntity.noContent().build();
     }
 
