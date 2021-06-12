@@ -4,7 +4,10 @@ package com.example.demo;
 import com.example.demo.contract.AccidentDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,6 +25,7 @@ import java.util.Calendar;
 @AutoConfigureMockMvc
 @TestPropertySource(
         locations = "classpath:application-integrationtests.properties")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class AccidentsTests extends CarsApiTestsBase{
 
 
@@ -32,11 +36,13 @@ public class AccidentsTests extends CarsApiTestsBase{
     BasicJsonTester json = new BasicJsonTester(getClass()) ;
 
     @Test
+    @Order(1)
     public void test_cars() throws Exception {
         testPostMethod();
     }
 
     @Test
+    @Order(2)
     public void addAccidentTest() throws Exception {
 
         Calendar calendar = Calendar.getInstance();
@@ -69,6 +75,7 @@ public class AccidentsTests extends CarsApiTestsBase{
 
     }
     @Test
+    @Order(3)
     public void getCarAccidentsTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/cars/1/accidents").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -86,6 +93,7 @@ public class AccidentsTests extends CarsApiTestsBase{
                 .andExpect(jsonPath("$[2].date").value(Matchers.containsString("2000-03")));
     }
     @Test
+    @Order(4)
     public void getCarAccidentsByIdTest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.get("/cars/1/accidents/3").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -100,6 +108,7 @@ public class AccidentsTests extends CarsApiTestsBase{
     }
 
     @Test
+    @Order(5)
     public void deleteAccidentTest() throws Exception {
 
         mvc.perform(delete("/cars/1/accidents/1")).andExpect(status().isNoContent());
@@ -108,6 +117,7 @@ public class AccidentsTests extends CarsApiTestsBase{
 
 
     @Test
+    @Order(6)
     public void updateAccidentTest() throws Exception {
 
         Calendar calendar = Calendar.getInstance();
