@@ -121,7 +121,7 @@ public class AccidentsTests extends CarsApiTestsBase{
     public void updateAccidentTest() throws Exception {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2000,1,1);
+        calendar.set(2000,0,1);
         AccidentDto accident = new AccidentDto("nowy wypadek", calendar.getTime(), "A3", "B3");
 
 
