@@ -1,14 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.contract.Car;
+import com.example.demo.contract.CarDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.BasicJsonTester;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -25,7 +21,7 @@ public abstract class CarsApiTestsBase {
 
     public void testPostMethod()throws Exception{
 
-        Car car = new Car("BMW","GD1234",200,false,20000);
+        CarDto car = new CarDto("BMW","GD1234",200,false,20000);
 
         mvc.perform(post("/cars")
                 .contentType("application/json")
@@ -40,9 +36,9 @@ public abstract class CarsApiTestsBase {
                 .andExpect(jsonPath("$.hasAccidents").value(false))
                 .andExpect(jsonPath("$.price").value(20000));
 
-        Car car1 = new Car("BMW1","GD1234",200,false,20000);
-        Car car2 = new Car("BMW2","GD1234",200,false,20000);
-        Car car3 = new Car("BMW3","GD1234",200,false,20000);
+        CarDto car1 = new CarDto("BMW1","GD1234",200,false,20000);
+        CarDto car2 = new CarDto("BMW2","GD1234",200,false,20000);
+        CarDto car3 = new CarDto("BMW3","GD1234",200,false,20000);
 
         mvc.perform(post("/cars")
                 .contentType("application/json")
