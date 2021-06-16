@@ -39,6 +39,7 @@ public class AccidentsTests extends CarsApiTestsBase{
     @Order(1)
     public void test_cars() throws Exception {
         testPostMethod();
+
     }
 
     @Test
