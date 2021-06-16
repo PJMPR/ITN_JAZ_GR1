@@ -1,14 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.contract.Car;
+import com.example.demo.contract.CarDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.BasicJsonTester;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -25,11 +21,11 @@ public abstract class CarsApiTestsBase {
 
     public void testPostMethod()throws Exception{
 
-        Car car = new Car("BMW","GD1234",200,false,20000);
+        CarDto carDto = new CarDto("BMW","GD1234",200,false,20000);
 
         mvc.perform(post("/cars")
                 .contentType("application/json")
-        .content(objectMapper.writeValueAsString(car)))
+                .content(objectMapper.writeValueAsString(carDto)))
                 .andExpect(status().is(204));
 
         mvc.perform(MockMvcRequestBuilders.get("/cars/1").accept(MediaType.APPLICATION_JSON))
@@ -40,23 +36,23 @@ public abstract class CarsApiTestsBase {
                 .andExpect(jsonPath("$.hasAccidents").value(false))
                 .andExpect(jsonPath("$.price").value(20000));
 
-        Car car1 = new Car("BMW1","GD1234",200,false,20000);
-        Car car2 = new Car("BMW2","GD1234",200,false,20000);
-        Car car3 = new Car("BMW3","GD1234",200,false,20000);
-
+        CarDto carDto1 = new CarDto("BMW1","GD1234",200,false,20000);
+        CarDto carDto2 = new CarDto("BMW2","GD1234",200,false,20000);
+        CarDto carDto3 = new CarDto("BMW3","GD1234",200,false,20000);
+        System.out.println(carDto);
         mvc.perform(post("/cars")
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(car1)));
-
-
-        mvc.perform(post("/cars")
-                .contentType("application/json")
-                .content(objectMapper.writeValueAsString(car2)));
+                .content(objectMapper.writeValueAsString(carDto1)));
 
 
         mvc.perform(post("/cars")
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(car3)));
+                .content(objectMapper.writeValueAsString(carDto2)));
+
+
+        mvc.perform(post("/cars")
+                .contentType("application/json")
+                .content(objectMapper.writeValueAsString(carDto3)));
 
         mvc.perform(MockMvcRequestBuilders.get("/cars/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
@@ -71,7 +67,7 @@ public abstract class CarsApiTestsBase {
 
         mvc.perform(put("/cars/1")
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(car3)))
+                .content(objectMapper.writeValueAsString(carDto3)))
                 .andExpect(status().isOk())
         ;
 
@@ -81,7 +77,7 @@ public abstract class CarsApiTestsBase {
 
         mvc.perform(put("/cars/60")
                 .contentType("application/json")
-                .content(objectMapper.writeValueAsString(car3)))
+                .content(objectMapper.writeValueAsString(carDto3)))
                 .andExpect(status().isNotFound());
 
 
