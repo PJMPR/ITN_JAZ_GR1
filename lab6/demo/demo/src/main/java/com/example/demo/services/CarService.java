@@ -1,6 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.contract.Car;
+import com.example.demo.contract.CarDto;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,49 +10,49 @@ import java.util.OptionalInt;
 
 @Service
 public class CarService {
-    private List<Car> db = new ArrayList<Car>();
+    private List<CarDto> db = new ArrayList<CarDto>();
 
-    public List<Car> getAllCar(){
+    public List<CarDto> getAllCar(){
         return this.db;
     }
 
-    public Car getByIdCar(int id){
-        Optional<Car> result =  db.stream().filter(p->p.getID()==id).findFirst();
+    public CarDto getByIdCar(int id){
+        Optional<CarDto> result =  db.stream().filter(p->p.getID()==id).findFirst();
         if(result.isPresent())
             return result.get();
         return null;
     }
 
-    public void saveCar(Car car){
+    public void saveCar(CarDto carDto){
         OptionalInt lastId = db.stream().map(p->p.getID()).mapToInt(x->x).max();
         if(!lastId.isPresent())
-            car.setID(1);
-        else car.setID(lastId.getAsInt()+1);
-        db.add(car);
+            carDto.setID(1);
+        else carDto.setID(lastId.getAsInt()+1);
+        db.add(carDto);
     }
 
-    public Car Update(int id, Car car){
-        Car result = getCarById(id);
+    public CarDto Update(int id, CarDto carDto){
+        CarDto result = getCarById(id);
         if (result == null) return null;
-        result.setModel(car.getModel());
-        result.setRegistrationNumber(car.getRegistrationNumber());
-        result.setMilleage(car.getMilleage());
-        result.setHasAccidents(car.isHasAccidents());
-        result.setPrice(car.getPrice());
+        result.setModel(carDto.getModel());
+        result.setRegistrationNumber(carDto.getRegistrationNumber());
+        result.setMilleage(carDto.getMilleage());
+        result.setHasAccidents(carDto.isHasAccidents());
+        result.setPrice(carDto.getPrice());
         return result;
     }
 
-    public Car delete(int id){
-        Car result = getCarById(id);
+    public CarDto delete(int id){
+        CarDto result = getCarById(id);
         if (result == null) return null;
         db.remove(result);
         return result;
     }
 
-    private Car getCarById(int id2) {
-        Optional<Car> fromList = db.stream().filter(p -> p.getID() == id2).findFirst();
+    private CarDto getCarById(int id2) {
+        Optional<CarDto> fromList = db.stream().filter(p -> p.getID() == id2).findFirst();
         if (!fromList.isPresent()) return null;
-        Car result = fromList.get();
+        CarDto result = fromList.get();
         return result;
     }
 }

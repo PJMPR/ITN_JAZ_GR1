@@ -1,10 +1,12 @@
-package com.example.demo.contract;
+package com.example.demo.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
+@NamedQuery(name = "Car.getAllByModel",
+            query = "select c from Car c where c.model = ?1")
 public class Car {
 
     private String model;
@@ -16,20 +18,24 @@ public class Car {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int ID;
 
+
+    @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
+    List<Accident> accidents = new ArrayList<Accident>();
+
+    public List<Accident> getAccidents() {
+        return accidents;
+    }
+
+    public void setAccidents(List<Accident> accidents) {
+        this.accidents = accidents;
+    }
+
     public int getID() {
         return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public Car(String model, String registrationNumber, int milleage, boolean hasAccidents, double price) {
-        this.model = model;
-        this.registrationNumber = registrationNumber;
-        this.milleage = milleage;
-        this.hasAccidents = hasAccidents;
-        this.price = price;
     }
 
     public String getModel() {
