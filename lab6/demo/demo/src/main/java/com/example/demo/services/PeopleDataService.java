@@ -115,12 +115,14 @@ public class PeopleDataService {
 
     }
 
-    public AddressDto updateAddress(int personId, int addressId, AddressDto addressDto) {
-        Address address = addressRepository.findById(addressId).orElse(null);
-        if(address == null) return null;
-        mapper.map(addressDto, address);
-        address.setId(addressId);
-        addressRepository.save(address);
-        return addressDto;
+    public AddressDto updateAddress(int personId, int addressId, AddressDto address) {
+        Person person = repository.findById(personId).orElse(null);
+        if(person==null)return null;
+        Address addressToUpdate = addressRepository.findById(addressId).orElse(null);
+        if(addressToUpdate==null)return null;
+        mapper.map(address, addressToUpdate);
+        addressToUpdate.setId(addressId);
+        addressRepository.save(addressToUpdate);
+        return address;
     }
 }
