@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "Person.getAllByName",
+@NamedQuery(name = "Person.findAllByName",
         query = "select p from Person p where p.name = ?1")
 public class Person {
 
@@ -16,7 +16,7 @@ public class Person {
     String surname;
     int age;
 
-    @OneToMany(mappedBy = "person", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     List<Address> addresses = new ArrayList<Address>();
 
     public List<Address> getAddresses() {
