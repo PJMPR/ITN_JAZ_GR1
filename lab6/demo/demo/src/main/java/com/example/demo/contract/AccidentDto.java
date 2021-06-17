@@ -9,6 +9,7 @@ public class AccidentDto {
     Date date;
     String culprit;
     String sufferer;
+    String location;
 
     public AccidentDto() {
     }
@@ -59,4 +60,13 @@ public class AccidentDto {
     public void setSufferer(String sufferer) {
         this.sufferer = sufferer;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
+
