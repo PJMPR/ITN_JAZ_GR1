@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.contract.Car;
+import com.example.demo.contract.CarDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class HelloController {
     }
 
     @GetMapping("model")// localhost:8080/hello/model z metoda HttpGet
-    public ResponseEntity<Car> getNewCarModel() {
+    public ResponseEntity<CarDto> getNewCarModel() {
 
 //        ResponseEntity<Car> response = new ResponseEntity<Car>(new Car(
 //                "Audi",
@@ -32,7 +32,7 @@ public class HelloController {
 //                false,
 //                30000.0), HttpStatus.OK);
 
-        ResponseEntity response = ResponseEntity.ok(new Car(
+        ResponseEntity response = ResponseEntity.ok(new CarDto(
                 "Audi",
                 "GD0001",
                 100000,
@@ -42,10 +42,10 @@ public class HelloController {
         return response;
     }
 
-    @PostMapping("model")// localhost:8080/hello/model z metoda HttpPost
-    public ResponseEntity<Car> saveCar(
-            @RequestBody Car car){
-        return ResponseEntity.ok(car);
+    @PostMapping("model")// localhost:8080/hello/model z metodaa HttpPost
+    public ResponseEntity<CarDto> saveCar(
+            @RequestBody CarDto carDto){
+        return ResponseEntity.ok(carDto);
     }
 
     @GetMapping("test/{some_value}")
