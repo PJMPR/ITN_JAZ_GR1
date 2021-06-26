@@ -70,7 +70,7 @@ public class PeopleRestController {
     }
 
     @GetMapping("{id}/addresses")
-    public ResponseEntity getAddresses(@PathVariable("id") int id){
+    public ResponseEntity<List<AddressDto>> getAddresses(@PathVariable("id") int id){
         List<AddressDto>  addresses = dataService.getAddresses(id);
         if(addresses==null)return ResponseEntity.notFound().build();
         return ResponseEntity.ok(addresses);
