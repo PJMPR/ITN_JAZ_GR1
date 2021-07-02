@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.contract.Car;
+import com.example.demo.contract.CarDto;
 import com.example.demo.services.CarService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,35 +18,35 @@ public class CarController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Car>> getAllCar(){
+    public ResponseEntity<List<CarDto>> getAllCar(){
         return ResponseEntity.ok(serviceCar.getAllCar());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Car> getByIdCar(@PathVariable("id") int id){
-        Car result = serviceCar.getByIdCar(id);
+    public ResponseEntity<CarDto> getByIdCar(@PathVariable("id") int id){
+        CarDto result = serviceCar.getByIdCar(id);
         if(result==null)
             return ResponseEntity.notFound().build();
         return ResponseEntity.ok(result);
     }
 
     @PostMapping()
-    public ResponseEntity<Car> saveCar(@RequestBody Car car){
+    public ResponseEntity<CarDto> saveCar(@RequestBody CarDto car){
         serviceCar.saveCar(car);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Car> updateCar(@PathVariable("id") int id, @RequestBody Car car){
+    public ResponseEntity<CarDto> updateCar(@PathVariable("id") int id, @RequestBody CarDto car){
 
-        Car result = serviceCar.Update(id, car);
+        CarDto result = serviceCar.Update(id, car);
         if(result == null) return ResponseEntity.notFound().build();
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity deleteCar(@PathVariable("id") int id){
-        Car deletedCar = serviceCar.delete(id);
+        CarDto deletedCar = serviceCar.delete(id);
         if(deletedCar==null) return ResponseEntity.notFound().build();
         return ResponseEntity.noContent().build();
     }
