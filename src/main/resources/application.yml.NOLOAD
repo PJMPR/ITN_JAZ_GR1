@@ -1,0 +1,18 @@
+#Zmień plik z formatu application.properties na format application.yml
+
+my:
+  custom:
+    property: Hello from application properties
+    boolean: false
+
+#dla przykładu z bazą danych z ćwiczeń:
+database:
+  mysql:
+    url: localhost
+    user: someUser
+    password: somePassword
+    timeout: 90
+
+webservices:
+  helion:
+    endpoint: http://helion.pl
